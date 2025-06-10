@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,7 +32,7 @@ const Login = () => {
 
       return navigate("/");
     } catch (err) {
-      console.error(err);
+      setError(err?.response?.data?.message || "Login failed");
     }
   };
 
@@ -64,7 +66,7 @@ const Login = () => {
             placeholder="••••••••"
           />
         </div>
-
+        <p className="text-red-600">{error}</p>
         <button
           type="submit"
           className="w-full cursor-pointer bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
