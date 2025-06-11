@@ -23,11 +23,11 @@ const UserCard = (user) => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-br rounded-3xl from-pink-100 via-white to-blue-100">
-      <div className="relative w-80 h-[600px] rounded-3xl overflow-hidden shadow-2xl group bg-white ">
+      <div className="relative w-96 sm:w-80 h-[100%] rounded-3xl overflow-hidden shadow-2xl group bg-white ">
         <img
           src={photoUrl}
           alt={`${firstName} ${lastName}`}
-          className="w-full h-[72%] object-cover transition-transform duration-300 group-hover:scale-105"
+          className=" w-full h-[72%] object-cover transition-transform duration-300 group-hover:scale-105"
         />
 
         {/* Info Panel */}

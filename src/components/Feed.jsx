@@ -30,9 +30,16 @@ const Feed = () => {
     getFeed();
   }, []);
 
+  if (feed === null || feed.length === 0 ) {
+    return (
+      <div>
+        No People found 
+      </div>
+    );
+  }
   return (
-    <div className="flex justify-center">
-      {feed && <UserCard user = {feed[0]} />}
+    <div className="flex justify-center my-10">
+      {feed && <UserCard user={feed[0]} />}
     </div>
   );
 };
