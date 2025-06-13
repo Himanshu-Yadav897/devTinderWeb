@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import { motion } from "motion/react";
+import logo from "/logo.png?url&.url";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
@@ -25,10 +26,16 @@ const NavBar = () => {
   return (
     <nav className="navbar bg-black text-white px-4 py-2 shadow-sm flex justify-between items-center">
       <div className="flex items-center">
-        <Link to="/" className="text-xl font-bold btn btn-ghost px-2">
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="flex items-center gap-1">
-            <motion.span
-              className="inline-block"
+        <Link to="/" className="btn btn-ghost px-2">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2"
+          >
+            <motion.img
+              src="/logo.png"
+              alt="Logo"
+              className="h-10 w-10"
               initial={{ y: -100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{
@@ -37,14 +44,11 @@ const NavBar = () => {
                 damping: 10,
                 delay: 0.6,
               }}
-            >
-              🧑‍💻
-            </motion.span>
-            devTinder
+            />
+            <span className="text-xl font-bold">MatchFixing</span>
             <motion.span
-              className="inline-block"
               initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
+              animate={{ y: 0, opacity: 1 , scale:1.6 }}
               transition={{
                 type: "spring",
                 stiffness: 120,
@@ -52,7 +56,7 @@ const NavBar = () => {
                 delay: 0.6,
               }}
             >
-              👩‍💻
+              🏏
             </motion.span>
           </motion.div>
         </Link>
