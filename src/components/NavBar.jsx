@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
+import { motion } from "motion/react";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
@@ -25,7 +26,35 @@ const NavBar = () => {
     <nav className="navbar bg-black text-white px-4 py-2 shadow-sm flex justify-between items-center">
       <div className="flex items-center">
         <Link to="/" className="text-xl font-bold btn btn-ghost px-2">
-          🧑‍💻 devTinder 👩‍💻
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="flex items-center gap-1">
+            <motion.span
+              className="inline-block"
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 10,
+                delay: 0.6,
+              }}
+            >
+              🧑‍💻
+            </motion.span>
+            devTinder
+            <motion.span
+              className="inline-block"
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 10,
+                delay: 0.6,
+              }}
+            >
+              👩‍💻
+            </motion.span>
+          </motion.div>
         </Link>
       </div>
 
@@ -78,13 +107,18 @@ const NavBar = () => {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
           </svg>
         </button>
       </div>
 
       {/* Mobile Dropdown */}
-      {menuOpen && user &&  (
+      {menuOpen && user && (
         <div className="absolute top-16 right-4 bg-white text-black w-56 rounded-lg shadow-lg z-50 p-4 space-y-2 md:hidden">
           <div className="flex items-center gap-2">
             <img
@@ -97,9 +131,12 @@ const NavBar = () => {
           <Link to="/profile" className="block hover:text-blue-600">
             Profile
           </Link>
-          <button className="block w-full text-left hover:text-blue-600">
-            Settings
-          </button>
+          <Link to="/connections" className="block hover:text-blue-600">
+            Friends
+          </Link>
+          <Link to="/requests" className="block hover:text-blue-600">
+            Connection Requests
+          </Link>
           <button
             onClick={handleLogout}
             className="block w-full text-left text-red-500 hover:text-red-700"

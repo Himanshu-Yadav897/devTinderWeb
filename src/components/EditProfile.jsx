@@ -64,7 +64,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstname(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   />
                 </label>
                 <label className="form-control w-full max-w-xs my-2">
@@ -75,18 +75,18 @@ const EditProfile = ({ user }) => {
                     type="text"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   />
                 </label>
                 <label className="form-control w-full max-w-xs my-2">
                   <div className="label">
-                    <span className="label-text">Age</span>
+                    <span className="label-text ">Age</span>
                   </div>
                   <input
                     type="text"
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   />
                 </label>
                 <label className="form-control w-full max-w-xs my-2">
@@ -97,7 +97,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     value={photoUrl}
                     onChange={(e) => setPhotoURL(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   />
                 </label>
                 <label className="form-control w-full max-w-xs my-2">
@@ -105,7 +105,7 @@ const EditProfile = ({ user }) => {
                     <span className="label-text">Gender</span>
                   </div>
                   <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn m-1">
+                    <div tabIndex={0} role="button" className="btn m-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
                       {gender || "Select gender"}
                     </div>
                     <ul
@@ -136,7 +136,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     value={skills}
                     onChange={(e) => setSkills(e.target.value.split(","))}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   />
                 </label>
 
@@ -149,7 +149,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     value={about}
                     onChange={(e) => setAbout(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   ></textarea>
                 </label>
               </div>

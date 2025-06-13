@@ -1,7 +1,12 @@
+import axios from "axios";
 import React from "react";
+import { BASE_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { removeFeed } from "../utils/feedSlice";
 
 const UserCard = (user) => {
   const {
+    _id,
     firstName,
     lastName,
     age,
@@ -11,14 +16,22 @@ const UserCard = (user) => {
     skills = [],
   } = user.user;
 
-  const handleIgnore = () => {
-    console.log("Ignored:", firstName);
-    // Add your ignore logic here
-  };
+  const dispatch = useDispatch();
 
-  const handleInterested = () => {
-    console.log("Interested in:", firstName);
-    // Add your interested logic here
+  const handleSendRequest = async (status, userId) => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/request/send/" + status + "/" + userId,
+        {},
+        { withCredentials: true }
+      );
+
+      console.log(userId);
+
+      dispatch(removeFeed(userId));
+    } catch (err) {
+      console.log("Error :- " + err.message);
+    }
   };
 
   return (
@@ -56,13 +69,17 @@ const UserCard = (user) => {
         {/* Action Buttons */}
         <div className="absolute bottom-3 left-0 right-0 px-5 flex justify-between items-center">
           <button
-            onClick={handleIgnore}
+            onClick={() => {
+              handleSendRequest("ignored", _id);
+            }}
             className="bg-red-100 text-red-500 font-medium px-4 py-2 rounded-full shadow hover:bg-red-200 transition"
           >
             Ignore
           </button>
           <button
-            onClick={handleInterested}
+            onClick={() => {
+              handleSendRequest("interested", _id);
+            }}
             className="bg-green-100 text-green-600 font-medium px-4 py-2 rounded-full shadow hover:bg-green-200 transition"
           >
             Interested

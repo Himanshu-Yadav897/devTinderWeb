@@ -74,6 +74,14 @@ const Login = () => {
         >
           Login
         </button>
+        <p
+          className="flex justify-center cursor-pointer mt-4 mx-auto"
+          onClick={() => {
+            return navigate("/signup");
+          }}
+        >
+          New User? Sign Up here
+        </p>
       </div>
     </div>
   );

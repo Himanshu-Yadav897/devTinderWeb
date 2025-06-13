@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Feed from "./components/Feed";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
+import Signup from "./components/SignUp";
 
 function App() {
   const userData = useSelector((store) => store.user);
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Body />}>
+          <Route path="/signup" element={<Signup />} />
             <Route path="/" element={userData ? <Feed /> : <Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
