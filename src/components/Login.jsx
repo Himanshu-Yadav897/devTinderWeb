@@ -4,6 +4,7 @@ import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
+import { easeInOut, motion } from "motion/react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -38,7 +39,12 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-700">
-      <div className="bg-black p-8 rounded-2xl shadow-md w-full max-w-md">
+      <motion.div
+        initial={{ opacity: 0, filter: "blur(10px)", y: 10 }}
+        whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+        className="bg-black p-8 rounded-2xl shadow-md w-full max-w-md"
+      >
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
 
         <div className="mb-4">
@@ -82,7 +88,7 @@ const Login = () => {
         >
           New User? Sign Up here
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };

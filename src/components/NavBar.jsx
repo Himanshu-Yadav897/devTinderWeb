@@ -24,7 +24,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="navbar bg-black text-white px-4 py-2 shadow-sm flex justify-between items-center">
+    <nav className="navbar  bg-black text-white px-4 py-2 shadow-sm flex justify-between items-center">
       <div className="flex items-center">
         <Link to="/" className="btn btn-ghost px-2">
           <motion.div
@@ -36,7 +36,7 @@ const NavBar = () => {
               src="/logo.png"
               alt="Logo"
               className="h-10 w-10"
-              initial={{ y: -100, opacity: 0 }}
+              initial={{ y: -100, opacity: 0  }}
               animate={{ y: 0, opacity: 1 }}
               transition={{
                 type: "spring",
