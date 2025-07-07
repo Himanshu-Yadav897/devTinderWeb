@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UserCard from "./Usercard";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { Cloudinary } from "@cloudinary/url-gen";
+import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 
 const EditProfile = ({ user }) => {
+  const cloudName = "dyghd0yk6";
+  const uploadPreset = "upload";
+
+  //cloudinary config
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName,
+    },
+  });
+
+  //upload widget config
+  const uwConfig = {
+    cloudName,
+    uploadPreset,
+    cropping: true,
+  };
+
+  const [publicId, setPublicId] = useState("");
   const [firstName, setFirstname] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [photoUrl, setPhotoURL] = useState(user.photoUrl);
@@ -46,7 +66,16 @@ const EditProfile = ({ user }) => {
     }
   };
 
-  
+  useEffect(() => {
+    if (publicId) {
+      const myImage = cld.image(publicId); // create image instance
+
+      const imageUrl = myImage.toURL(); // generate URL from publicId
+
+      setPhotoURL(imageUrl); // ✅ this is what gets saved to MongoDB
+      console.log("Generated image URL:", imageUrl);
+    }
+  }, [publicId]);
 
   return (
     <>
@@ -56,7 +85,7 @@ const EditProfile = ({ user }) => {
             <div className="card-body">
               <h2 className="card-title justify-center">Edit Profile</h2>
               <div>
-                <label className="form-control w-full max-w-xs my-2">
+                <label className="form-control w-full max-w-xs  ">
                   <div className="label">
                     <span className="label-text">First Name</span>
                   </div>
@@ -64,7 +93,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstname(e.target.value)}
-                    className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
+                    className="input input-bordered mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   />
                 </label>
                 <label className="form-control w-full max-w-xs my-2">
@@ -75,7 +104,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
+                    className="input mb-3 input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   />
                 </label>
                 <label className="form-control w-full max-w-xs my-2">
@@ -86,10 +115,10 @@ const EditProfile = ({ user }) => {
                     type="text"
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
-                    className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
+                    className="input mb-3 input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   />
                 </label>
-                <label className="form-control w-full max-w-xs my-2">
+                {/* <label className="form-control w-full max-w-xs my-2">
                   <div className="label">
                     <span className="label-text">PhotoURL</span>
                   </div>
@@ -99,13 +128,25 @@ const EditProfile = ({ user }) => {
                     onChange={(e) => setPhotoURL(e.target.value)}
                     className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   />
-                </label>
+                </label> */}
+
+                <div>
+                  <span className="label-text text-gray-600 pr-5">Upload Photo </span>
+                  <CloudinaryUploadWidget
+                    uwConfig={uwConfig}
+                    setPublicId={setPublicId}
+                  />
+                </div>
                 <label className="form-control w-full max-w-xs my-2">
                   <div className="label">
                     <span className="label-text">Gender</span>
                   </div>
                   <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn m-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      className="btn m-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
                       {gender || "Select gender"}
                     </div>
                     <ul
@@ -155,7 +196,7 @@ const EditProfile = ({ user }) => {
               </div>
               <p className="text-red-500 text-center">{error}</p>
               <div className="card-actions justify-center mt-2">
-                <button className="btn btn-primary" onClick={saveProfile}>
+                <button className="cloudinary-button py-2" onClick={saveProfile}>
                   Save Profile
                 </button>
               </div>
@@ -166,7 +207,8 @@ const EditProfile = ({ user }) => {
         {/* Vertical Divider with Arrow Label */}
         <div className="flex flex-col items-center mx-4 max-sm:my-10 justify-center">
           <div className=" text-gray-400 whitespace-nowrap">
-            Preview of your profile <span className=" max-sm:hidden ">➡</span> <span className="sm:hidden">⬇</span>
+            Preview of your profile <span className=" max-sm:hidden ">➡</span>{" "}
+            <span className="sm:hidden">⬇</span>
           </div>
         </div>
 
