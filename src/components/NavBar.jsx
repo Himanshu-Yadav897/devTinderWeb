@@ -30,34 +30,23 @@ const NavBar = () => {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2"
+            className="flex items-center justify-center"
           >
             <motion.img
               src="/logo.png"
               alt="Logo"
-              className="h-10 w-10"
-              initial={{ y: -100, opacity: 0  }}
+              className="h-auto w-14"
+              initial={{ y: -100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{
                 type: "spring",
                 stiffness: 120,
                 damping: 10,
                 delay: 0.6,
-              }}
+              }} 
+
             />
-            <span className="text-xl font-bold">MatchFixing</span>
-            <motion.span
-              initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 , scale:1.6 }}
-              transition={{
-                type: "spring",
-                stiffness: 120,
-                damping: 10,
-                delay: 0.6,
-              }}
-            >
-              🏏
-            </motion.span>
+            <img src="../../logo-3.png" alt="Logo" className="h-auto w-27 bg-black hover:border-none" ></img>
           </motion.div>
         </Link>
       </div>

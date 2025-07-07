@@ -16,7 +16,22 @@ const Footer = () => {
   return (
     <footer className="footer footer-horizontal footer-center bg-black text-gray-400 rounded p-10">
       <nav className="grid grid-flow-col gap-4">
-        <a className="link link-hover">About us</a>
+        <MotionLink
+          to="/about"
+          className="relative inline-block text-sm"
+          initial="rest"
+          whileHover="hover"
+          animate="rest"
+          variants={linkVariants}
+        >
+          About Us
+          {/* Underline */}
+          <motion.span
+            className="absolute left-0 -bottom-1 h-[2px] bg-white"
+            variants={underlineVariants}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          />
+        </MotionLink>
         <MotionLink
           to="/termsofService"
           className="relative inline-block text-sm"

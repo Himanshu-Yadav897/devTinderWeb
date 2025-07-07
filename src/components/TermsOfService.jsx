@@ -1,12 +1,19 @@
 import React from "react";
+import {motion} from "motion/react";
 
 const TermsOfService = () => (
+  <motion.div
+    initial={{ opacity: 0, filter: "blur(10px)", y: 10 }}
+    whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+    transition={{ duration: 1, ease: "easeInOut" }}
+    className="bg-gray-700"
+  >
   <div className="max-w-3xl mx-auto px-6 py-12 text-gray-100">
-    <h1 className="text-3xl font-semibold mb-6 text-indigo-600">
+    <h1 className="text-3xl font-semibold mb-6 text-rose-600">
       Terms of Service
     </h1>
     <p className="mb-4">
-      Welcome to <strong>matchfixing.xyz</strong> — a real-time chat platform.
+      Welcome to <strong>VibePair.online</strong> — a real-time chat platform.
       By using our services, you agree to the terms below:
     </p>
     <div className="space-y-4">
@@ -32,7 +39,7 @@ const TermsOfService = () => (
       />
       <PolicyItem
         title="6. Intellectual Property"
-        desc="All platform content and features belong to matchfixing.xyz."
+        desc="All platform content and features belong to VibePair.online."
       />
       <PolicyItem
         title="7. Changes to Terms"
@@ -40,10 +47,11 @@ const TermsOfService = () => (
       />
       <PolicyItem
         title="8. Contact"
-        desc="Email us at support@matchfixing.xyz."
+        desc="Email us at support@vibepair.online."
       />
     </div>
   </div>
+  </motion.div>
 );
 
 const PolicyItem = ({ title, desc }) => (

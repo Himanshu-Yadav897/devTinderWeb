@@ -10,9 +10,11 @@ import Signup from "./components/SignUp";
 import TermsOfService from "./components/TermsOfService";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import RefundPolicy from "./components/RefundPolicy";
+import About from "./components/About";
 
 function App() {
   const userData = useSelector((store) => store.user);
+  //We don’t match. We vibe and pair.
   return (
     <>
       <BrowserRouter basename="/">
@@ -24,6 +26,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/connections" element={<Connections />} />
             <Route path="/requests" element={<Requests />} />
+            <Route path="/about" element={<About />} />
             <Route path="/termsOfService" element={<TermsOfService />} />
             <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
             <Route path="/refundPolicy" element={<RefundPolicy />} />
