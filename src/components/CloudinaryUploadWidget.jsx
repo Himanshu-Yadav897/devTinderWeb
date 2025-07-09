@@ -42,7 +42,7 @@ const CloudinaryUploadWidget = ({ uwConfig, setPublicId }) => {
     <button
       ref={uploadButtonRef}
       id="upload_widget"
-      className="cloudinary-button py-2"
+      className="bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8] text-black px-4 py-2  rounded-full font-semibold text-sm hover:opacity-90 transition"
     >
       Upload
     </button>

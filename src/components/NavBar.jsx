@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
@@ -8,89 +8,184 @@ import { motion } from "motion/react";
 import logo from "/logo.png?url&.url";
 
 const NavBar = () => {
+  const MotionLink = motion(Link);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
-      return navigate("/login");
+      navigate("/login");
     } catch (err) {
       console.log(err);
     }
   };
 
-  return (
-    <nav className="navbar  bg-black text-white px-4 py-2 shadow-sm flex justify-between items-center">
-      <div className="flex items-center">
-        <Link to="/" className="btn btn-ghost px-2">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center"
-          >
-            <motion.img
-              src="/logo.png"
-              alt="Logo"
-              className="h-auto w-14"
-              initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 120,
-                damping: 10,
-                delay: 0.6,
-              }} 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-            />
-            <img src="../../logo-3.png" alt="Logo" className="h-auto w-27 bg-black hover:border-none" ></img>
-          </motion.div>
+  const underlineVariants = {
+    rest: { width: 0 },
+    hover: { width: "100%" },
+  };
+  const linkVariants = {
+    rest: { color: "#ffffff" }, // gray-400
+    hover: { color: "#DFC9F4" }, // white
+  };
+
+  return (
+    <nav className="navbar bg-black text-white px-4 py-2 shadow-sm flex justify-between items-center relative z-50">
+      {/* Logo */}
+      <div className="flex items-center">
+        <Link to={user ? "/home" : "/"} className="flex items-center">
+          <motion.img
+            src={logo}
+            alt="Logo"
+            className="h-auto w-10"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 120,
+              damping: 10,
+              delay: 0.6,
+            }}
+          />
+          <span className="text-[#DFC9F5] text-2xl font-bold ">Vibe</span>
+          <span className="text-[#B7FCD8] text-2xl font-bold ">Pair</span>
         </Link>
       </div>
 
-      {user && (
-        <div className="md:flex items-center gap-3 hidden">
-          <span className="hidden md:inline">Welcome, {user.firstName}</span>
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
+      {/* Desktop Links */}
+      <div className="hidden md:flex items-center gap-6 text-sm font-medium">
+        {!user ? (
+          <>
+            <MotionLink
+              to="/"
+              className="relative inline-block text-sm"
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+              variants={linkVariants}
             >
-              <div className="w-10 rounded-full">
-                <img alt="user" src={user.photoUrl} />
-              </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm bg-white dropdown-content text-black rounded-box z-50 mt-3 w-52 p-2 shadow"
+              Home
+              {/* Underline */}
+              <motion.span
+                className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
+                variants={underlineVariants}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              />
+            </MotionLink>
+            <MotionLink
+              to="/about"
+              className="relative inline-block text-sm"
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+              variants={linkVariants}
             >
-              <li>
-                <Link to="/profile" className="justify-between">
-                  Profile <span className="badge">New</span>
+              About Us
+              {/* Underline */}
+              <motion.span
+                className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
+                variants={underlineVariants}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              />
+            </MotionLink>
+            <MotionLink
+              to="/about"
+              className="relative inline-block text-sm"
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+              variants={linkVariants}
+            >
+              Contact
+              {/* Underline */}
+              <motion.span
+                className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
+                variants={underlineVariants}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              />
+            </MotionLink>
+            <Link to="/login">
+              <button className="bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8] text-black px-5 py-2 rounded-full font-semibold shadow hover:opacity-90 transition">
+                Login
+              </button>
+            </Link>
+          </>
+        ) : (
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-2 focus:outline-none"
+            >
+              <img
+                src={user.photoUrl}
+                alt="avatar"
+                className="w-10 h-10 rounded-full border-2 border-[#B7FCD8]"
+              />
+            </button>
+
+            {dropdownOpen && (
+              <div className="absolute right-0 top-14 bg-green-100 text-black w-52 rounded-lg shadow-lg z-50 py-2">
+                <div className="px-4 py-2 font-semibold border-b border-gray-200">
+                  Hi, {user.firstName}
+                </div>
+                <Link
+                  to="/profile"
+                  className="block px-4 py-2 hover:bg-[#DFC9F5] hover:text-black"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  Profile
                 </Link>
-              </li>
-              <li>
-                <Link to="/connections">Friends</Link>
-              </li>
-              <li>
-                <Link to="/requests">Connection Requests</Link>
-              </li>
-              <li>
-                <a onClick={handleLogout}>Logout</a>
-              </li>
-            </ul>
+                <Link
+                  to="/connections"
+                  className="block px-4 py-2 hover:bg-[#DFC9F5] hover:text-black"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  Friends
+                </Link>
+                <Link
+                  to="/requests"
+                  className="block px-4 py-2 hover:bg-[#DFC9F5] hover:text-black"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  Friend Requests
+                </Link>
+                <button
+                  onClick={() => {
+                    setDropdownOpen(false);
+                    handleLogout();
+                  }}
+                  className="w-full text-left px-4 py-2 text-red-500 hover:bg-red-100"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Mobile Hamburger */}
       <div className="md:hidden">
         <button
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="btn btn-ghost btn-circle"
         >
           <svg
@@ -111,31 +206,52 @@ const NavBar = () => {
       </div>
 
       {/* Mobile Dropdown */}
-      {menuOpen && user && (
-        <div className="absolute top-16 right-4 bg-white text-black w-56 rounded-lg shadow-lg z-50 p-4 space-y-2 md:hidden">
-          <div className="flex items-center gap-2">
-            <img
-              src={user.photoUrl}
-              alt="avatar"
-              className="w-8 h-8 rounded-full"
-            />
-            <span className="font-medium">{user.firstName}</span>
-          </div>
-          <Link to="/profile" className="block hover:text-blue-600">
-            Profile
-          </Link>
-          <Link to="/connections" className="block hover:text-blue-600">
-            Friends
-          </Link>
-          <Link to="/requests" className="block hover:text-blue-600">
-            Connection Requests
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="block w-full text-left text-red-500 hover:text-red-700"
-          >
-            Logout
-          </button>
+      {mobileMenuOpen && (
+        <div className="absolute top-16 right-4 bg-green-100 text-black w-56 rounded-lg shadow-lg z-50 p-4 space-y-2 md:hidden">
+          {!user ? (
+            <>
+              <Link to="/" className="block hover:text-[#DFC9F5]">
+                Home
+              </Link>
+              <Link to="/about" className="block hover:text-[#DFC9F5]">
+                About
+              </Link>
+              <Link to="/contact" className="block hover:text-[#DFC9F5]">
+                Contact Us
+              </Link>
+              <Link to="/login">
+                <button className="w-full mt-2 bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8] text-black px-4 py-2 rounded-full font-semibold hover:opacity-90 transition">
+                  Login
+                </button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-2">
+                <img
+                  src={user.photoUrl}
+                  alt="avatar"
+                  className="w-8 h-8 rounded-full"
+                />
+                <span className="font-medium">{user.firstName}</span>
+              </div>
+              <Link to="/profile" className="block hover:text-[#DFC9F5]">
+                Profile
+              </Link>
+              <Link to="/connections" className="block hover:text-[#DFC9F5]">
+                Friends
+              </Link>
+              <Link to="/requests" className="block hover:text-[#DFC9F5]">
+                Friend Requests
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="block w-full text-left text-red-500 hover:text-red-700"
+              >
+                Logout
+              </button>
+            </>
+          )}
         </div>
       )}
     </nav>

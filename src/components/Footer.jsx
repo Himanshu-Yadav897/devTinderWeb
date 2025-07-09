@@ -5,8 +5,8 @@ import { motion } from "motion/react";
 const Footer = () => {
   const MotionLink = motion(Link);
   const linkVariants = {
-    rest: { color: "#9ca3af" }, // gray-400
-    hover: { color: "#ffffff" }, // white
+    rest: { color: "#ffffff" }, // gray-400
+    hover: { color: "#DFC9F4" }, // white
   };
 
   const underlineVariants = {
@@ -27,9 +27,25 @@ const Footer = () => {
           About Us
           {/* Underline */}
           <motion.span
-            className="absolute left-0 -bottom-1 h-[2px] bg-white"
+            className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
             variants={underlineVariants}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+          />
+        </MotionLink>
+        <MotionLink
+          to="/about"
+          className="relative inline-block text-sm"
+          initial="rest"
+          whileHover="hover"
+          animate="rest"
+          variants={linkVariants}
+        >
+          Contact Us
+          {/* Underline */}
+          <motion.span
+            className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
+            variants={underlineVariants}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
           />
         </MotionLink>
         <MotionLink
@@ -43,27 +59,27 @@ const Footer = () => {
           Site Terms
           {/* Underline */}
           <motion.span
-            className="absolute left-0 -bottom-1 h-[2px] bg-white"
+            className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
             variants={underlineVariants}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
           />
         </MotionLink>
         <MotionLink
           to="/privacyPolicy"
-          className="relative inline-block text-sm"
+          className="relative inline-block text-sm text-white"
           initial="rest"
           whileHover="hover"
           animate="rest"
           variants={linkVariants}
         >
           Privacy Policy
-          {/* Underline */}
           <motion.span
-            className="absolute left-0 -bottom-1 h-[2px] bg-white"
+            className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
             variants={underlineVariants}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
           />
         </MotionLink>
+
         <MotionLink
           to="/refundPolicy"
           className="relative inline-block text-sm"
@@ -75,9 +91,9 @@ const Footer = () => {
           Refund Policy
           {/* Underline */}
           <motion.span
-            className="absolute left-0 -bottom-1 h-[2px] bg-white"
+            className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
             variants={underlineVariants}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
           />
         </MotionLink>
       </nav>

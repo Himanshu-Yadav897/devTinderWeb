@@ -131,7 +131,7 @@ const EditProfile = ({ user }) => {
                 </label> */}
 
                 <div>
-                  <span className="label-text text-gray-600 pr-5">Upload Photo </span>
+                  <span className="label-text text-gray-400 pr-5">Upload Photo </span>
                   <CloudinaryUploadWidget
                     uwConfig={uwConfig}
                     setPublicId={setPublicId}
@@ -196,7 +196,7 @@ const EditProfile = ({ user }) => {
               </div>
               <p className="text-red-500 text-center">{error}</p>
               <div className="card-actions justify-center mt-2">
-                <button className="cloudinary-button py-2" onClick={saveProfile}>
+                <button className="bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8] text-black px-4 py-2 w-full rounded-full font-semibold text-sm hover:opacity-90 transition" onClick={saveProfile}>
                   Save Profile
                 </button>
               </div>

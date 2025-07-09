@@ -33,12 +33,12 @@ const Connections = () => {
 
   return (
     <div className="p-4 bg-base-200 min-h-screen">
-      <h2 className="text-2xl font-semibold mb-6 text-center">Your Friends</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-center text-[#DFC9F4]">Your Friends</h2>
       <div className="flex flex-col items-center gap-4">
         {connections.map((user) => (
           <div
             key={user._id}
-            className="flex items-start hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] gap-4 w-full max-w-md bg-black text-white p-4 rounded-xl shadow-md border"
+            className="flex items-start hover:shadow-[0_20px_50px_rgba(183,_252,_216,_0.7)] gap-4 w-full max-w-md bg-black text-white p-4 rounded-xl shadow-md border"
           >
             <img
               src={user.photoUrl}
