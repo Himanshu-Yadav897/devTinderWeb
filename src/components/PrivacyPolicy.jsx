@@ -1,18 +1,19 @@
 import React from "react";
-import {motion} from "motion/react";
+import { motion } from "motion/react";
 
 const PrivacyPolicy = () => (
   <motion.div
     initial={{ opacity: 0, filter: "blur(10px)", y: 10 }}
     whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
     transition={{ duration: 1, ease: "easeInOut" }}
-    className="bg-gray-700"
+    className="min-h-screen bg-gray-700 py-12 px-4"
   >
-    <div className="max-w-3xl mx-auto px-6 py-12 text-gray-100">
-      <h1 className="text-3xl font-semibold mb-6 text-rose-600">
+    <div className="max-w-3xl mx-auto p-8 bg-gray-800 rounded-2xl shadow-lg text-gray-100">
+      <h1 className="text-4xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-purple-400">
         Privacy Policy
       </h1>
-      <div className="space-y-4">
+
+      <div className="space-y-6 text-base leading-relaxed">
         <PolicyItem
           title="1. What We Collect"
           desc="Name, email, usage data, and payment info when applicable."
@@ -39,9 +40,12 @@ const PrivacyPolicy = () => (
         />
         <PolicyItem
           title="7. Policy Changes"
-          desc="May update this policy, changes will be reflected here."
+          desc="May update this policy. Changes will be reflected here."
         />
-        <PolicyItem title="8. Contact" desc="support@vibepair.online" />
+        <PolicyItem
+          title="8. Contact"
+          desc="Email us at support@vibepair.online."
+        />
       </div>
     </div>
   </motion.div>
@@ -49,7 +53,7 @@ const PrivacyPolicy = () => (
 
 const PolicyItem = ({ title, desc }) => (
   <div>
-    <h2 className="font-semibold">{title}</h2>
+    <h2 className="font-semibold text-lg text-rose-400">{title}</h2>
     <p className="text-gray-300">{desc}</p>
   </div>
 );

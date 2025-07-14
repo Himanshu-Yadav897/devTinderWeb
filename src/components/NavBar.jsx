@@ -6,9 +6,9 @@ import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import { motion } from "motion/react";
 import logo from "/logo.png?url&.url";
+import LinkMotion from "./LinkMotion";
 
 const NavBar = () => {
-  const MotionLink = motion(Link);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,15 +38,6 @@ const NavBar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const underlineVariants = {
-    rest: { width: 0 },
-    hover: { width: "100%" },
-  };
-  const linkVariants = {
-    rest: { color: "#ffffff" }, // gray-400
-    hover: { color: "#DFC9F4" }, // white
-  };
-
   return (
     <nav className="navbar bg-black text-white px-4 py-2 shadow-sm flex justify-between items-center relative z-50">
       {/* Logo */}
@@ -74,54 +65,9 @@ const NavBar = () => {
       <div className="hidden md:flex items-center gap-6 text-sm font-medium">
         {!user ? (
           <>
-            <MotionLink
-              to="/"
-              className="relative inline-block text-sm"
-              initial="rest"
-              whileHover="hover"
-              animate="rest"
-              variants={linkVariants}
-            >
-              Home
-              {/* Underline */}
-              <motion.span
-                className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
-                variants={underlineVariants}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              />
-            </MotionLink>
-            <MotionLink
-              to="/about"
-              className="relative inline-block text-sm"
-              initial="rest"
-              whileHover="hover"
-              animate="rest"
-              variants={linkVariants}
-            >
-              About Us
-              {/* Underline */}
-              <motion.span
-                className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
-                variants={underlineVariants}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              />
-            </MotionLink>
-            <MotionLink
-              to="/about"
-              className="relative inline-block text-sm"
-              initial="rest"
-              whileHover="hover"
-              animate="rest"
-              variants={linkVariants}
-            >
-              Contact
-              {/* Underline */}
-              <motion.span
-                className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
-                variants={underlineVariants}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              />
-            </MotionLink>
+            <LinkMotion to="/">Home</LinkMotion>
+            <LinkMotion>About Us</LinkMotion>
+            <LinkMotion>Contact</LinkMotion>
             <Link to="/login">
               <button className="bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8] text-black px-5 py-2 rounded-full font-semibold shadow hover:opacity-90 transition">
                 Login

@@ -1,101 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
+import LinkMotion from "./LinkMotion";
 
 const Footer = () => {
-  const MotionLink = motion(Link);
-  const linkVariants = {
-    rest: { color: "#ffffff" }, // gray-400
-    hover: { color: "#DFC9F4" }, // white
-  };
-
-  const underlineVariants = {
-    rest: { width: 0 },
-    hover: { width: "100%" },
-  };
   return (
     <footer className="footer footer-horizontal footer-center bg-black text-gray-400 rounded p-10">
       <nav className="grid grid-flow-col gap-4">
-        <MotionLink
-          to="/about"
-          className="relative inline-block text-sm"
-          initial="rest"
-          whileHover="hover"
-          animate="rest"
-          variants={linkVariants}
-        >
-          About Us
-          {/* Underline */}
-          <motion.span
-            className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
-            variants={underlineVariants}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          />
-        </MotionLink>
-        <MotionLink
-          to="/about"
-          className="relative inline-block text-sm"
-          initial="rest"
-          whileHover="hover"
-          animate="rest"
-          variants={linkVariants}
-        >
-          Contact Us
-          {/* Underline */}
-          <motion.span
-            className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
-            variants={underlineVariants}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          />
-        </MotionLink>
-        <MotionLink
-          to="/termsofService"
-          className="relative inline-block text-sm"
-          initial="rest"
-          whileHover="hover"
-          animate="rest"
-          variants={linkVariants}
-        >
-          Site Terms
-          {/* Underline */}
-          <motion.span
-            className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
-            variants={underlineVariants}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          />
-        </MotionLink>
-        <MotionLink
-          to="/privacyPolicy"
-          className="relative inline-block text-sm text-white"
-          initial="rest"
-          whileHover="hover"
-          animate="rest"
-          variants={linkVariants}
-        >
-          Privacy Policy
-          <motion.span
-            className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
-            variants={underlineVariants}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          />
-        </MotionLink>
-
-        <MotionLink
-          to="/refundPolicy"
-          className="relative inline-block text-sm"
-          initial="rest"
-          whileHover="hover"
-          animate="rest"
-          variants={linkVariants}
-        >
-          Refund Policy
-          {/* Underline */}
-          <motion.span
-            className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8]"
-            variants={underlineVariants}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          />
-        </MotionLink>
+        <LinkMotion>About Us</LinkMotion>
+        <LinkMotion>Contact Us</LinkMotion>
+        <LinkMotion>Site Terms</LinkMotion>
+        <LinkMotion>Privacy Policy</LinkMotion>
+        <LinkMotion>Refund Policy</LinkMotion>
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">

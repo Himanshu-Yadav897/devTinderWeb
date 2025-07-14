@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
@@ -33,8 +33,6 @@ const Signup = () => {
         { withCredentials: true }
       );
 
-      //   console.log(res?.data);
-
       dispatch(addUser(res?.data));
       setToast(true);
       setTimeout(() => {
@@ -47,112 +45,98 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center py-3 bg-gray-700">
-      <div className="bg-black p-8 rounded-2xl shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Signup</h2>
+    <div className="flex items-center justify-center min-h-screen bg-[#17253A] px-4 py-4">
+      <div className="bg-black p-8 rounded-2xl shadow-md w-full max-w-md border border-[#2c2c2c]">
+        <h2 className="text-3xl font-bold mb-6 text-center text-[#DFC9F5]">Create Your Account</h2>
 
-        <div className="mb-4">
-          <label className="block mb-1 text-sm font-medium">
-            First Name : {firstName}
-          </label>
-          <input
+        {/* Form Fields */}
+        <div className="space-y-4">
+          <InputField
+            label="First Name"
             type="text"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={setFirstName}
             placeholder="Enter first name"
           />
-        </div>
-
-        <div className="mb-4">
-          <label className="block mb-1 text-sm font-medium">
-            Last Name : {lastName}
-          </label>
-          <input
+          <InputField
+            label="Last Name"
             type="text"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={setLastName}
             placeholder="Enter last name"
           />
-        </div>
-
-        <div className="mb-4">
-          <label className="block mb-1 text-sm font-medium">
-            Email : {emailId}
-          </label>
-          <input
+          <InputField
+            label="Email"
             type="email"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={emailId}
-            onChange={(e) => setEmailId(e.target.value)}
+            onChange={setEmailId}
             placeholder="example@email.com"
           />
-        </div>
-
-        <div className="mb-4">
-          <label className="block mb-1 text-sm font-medium">
-            Password : {password}
-          </label>
-          <input
+          <InputField
+            label="Password"
             type="password"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={setPassword}
             placeholder="••••••••"
           />
-        </div>
-
-        <div className="mb-4">
-          <label className="block mb-1 text-sm font-medium">Age : {age}</label>
-          <input
+          <InputField
+            label="Age"
             type="number"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={age}
-            onChange={(e) => setAge(e.target.value)}
+            onChange={setAge}
             placeholder="Enter your age"
           />
-        </div>
-
-        <div className="mb-6">
-          <label className="block mb-1 text-sm font-medium">
-            Gender : {gender}
-          </label>
-          <input
+          <InputField
+            label="Gender"
             type="text"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={gender}
-            onChange={(e) => setGender(e.target.value)}
+            onChange={setGender}
             placeholder="male / female / others"
           />
         </div>
 
-        <p className="text-red-600">{error}</p>
+        {/* Error + Button */}
+        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         <button
           type="submit"
-          className="w-full cursor-pointer bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          className="mt-6 w-full bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8] text-black py-2 rounded-lg hover:cursor-pointer font-semibold hover:opacity-90 transition"
           onClick={handleSignup}
         >
           Signup
         </button>
+
         <p
-          className="flex justify-center cursor-pointer mt-4 mx-auto"
-          onClick={() => {
-            return navigate("/login");
-          }}
+          className="text-sm mt-4 text-center text-white cursor-pointer hover:text-[#DFC9F5]"
+          onClick={() => navigate("/login")}
         >
-          Existing User? Login here
+          Already have an account? <span className="underline">Login here</span>
         </p>
       </div>
+
+      {/* Toast Message */}
       {toast && (
-        <div className="toast toast-top toast-center pt-20 ">
+        <div className="toast toast-top toast-center pt-20">
           <div className="alert alert-success">
-            <span>User saved successfully</span>
+            <span>User registered successfully</span>
           </div>
         </div>
       )}
     </div>
   );
 };
+
+// Reusable Input Field Component
+const InputField = ({ label, type, value, onChange, placeholder }) => (
+  <div>
+    <label className="block mb-1 text-sm font-medium text-white">{label}</label>
+    <input
+      type={type}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder}
+      className="w-full px-4 py-2 border rounded-lg bg-[#1f1f1f] text-white border-[#555] focus:outline-none focus:ring-2 focus:ring-[#DFC9F5]"
+    />
+  </div>
+);
 
 export default Signup;
