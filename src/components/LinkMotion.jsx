@@ -22,6 +22,7 @@ const LinkMotion = ({ to, children, className = "" }) => (
     whileHover="hover"
     animate="rest"
     variants={linkVariants}
+    key={location.pathname}
   >
     {children}
     <motion.span

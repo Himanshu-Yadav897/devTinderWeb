@@ -7,11 +7,11 @@ const Footer = () => {
   return (
     <footer className="footer footer-horizontal footer-center bg-black text-gray-400 rounded p-10">
       <nav className="grid grid-flow-col gap-4">
-        <LinkMotion>About Us</LinkMotion>
-        <LinkMotion>Contact Us</LinkMotion>
-        <LinkMotion>Site Terms</LinkMotion>
-        <LinkMotion>Privacy Policy</LinkMotion>
-        <LinkMotion>Refund Policy</LinkMotion>
+        <LinkMotion to="/about">About Us</LinkMotion>
+        <LinkMotion to="contact">Contact Us</LinkMotion>
+        <LinkMotion to="/termsOfService">Site Terms</LinkMotion>
+        <LinkMotion to="/privacyPolicy">Privacy Policy</LinkMotion>
+        <LinkMotion to="/refundPolicy">Refund Policy</LinkMotion>
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">

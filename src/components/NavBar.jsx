@@ -66,8 +66,8 @@ const NavBar = () => {
         {!user ? (
           <>
             <LinkMotion to="/">Home</LinkMotion>
-            <LinkMotion>About Us</LinkMotion>
-            <LinkMotion>Contact</LinkMotion>
+            <LinkMotion to="/about">About Us</LinkMotion>
+            <LinkMotion to="contact">Contact</LinkMotion>
             <Link to="/login">
               <button className="bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8] text-black px-5 py-2 rounded-full font-semibold shadow hover:opacity-90 transition">
                 Login

@@ -69,12 +69,12 @@ const Home = () => {
             We don’t match. <br />
             We{" "}
             <span ref={vibeRef} className="text-[#DFC9F5] inline-block">
-              Viiiiiiiibiiiiiing
+              Vibe
             </span>{" "}
             <br />
             and{" "}
             <span ref={pairRef} className="text-[#B7FCD8] inline-block">
-              Paaaairiiiing
+              Pair
             </span>
             .
           </motion.h1>
