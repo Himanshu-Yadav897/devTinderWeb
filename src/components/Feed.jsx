@@ -50,7 +50,7 @@ const Feed = () => {
   }
 
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex justify-center my-1">
       {feed.length > 0 && (
         <ImageSwiper
           key={feed[0]._id}
