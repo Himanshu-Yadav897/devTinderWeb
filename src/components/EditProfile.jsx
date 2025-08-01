@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import UserCard from "./Usercard";
+import ImageSwiper from "../ui/ImageSwiperPage";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
@@ -118,20 +118,11 @@ const EditProfile = ({ user }) => {
                     className="input mb-3 input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
                   />
                 </label>
-                {/* <label className="form-control w-full max-w-xs my-2">
-                  <div className="label">
-                    <span className="label-text">PhotoURL</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={photoUrl}
-                    onChange={(e) => setPhotoURL(e.target.value)}
-                    className="input input-bordered focus:outline-none focus:ring-2 focus:ring-blue-500 w-full max-w-xs"
-                  />
-                </label> */}
 
                 <div>
-                  <span className="label-text text-gray-400 pr-5">Upload Photo </span>
+                  <span className="label-text text-gray-400 pr-5">
+                    Upload Photo{" "}
+                  </span>
                   <CloudinaryUploadWidget
                     uwConfig={uwConfig}
                     setPublicId={setPublicId}
@@ -196,7 +187,10 @@ const EditProfile = ({ user }) => {
               </div>
               <p className="text-red-500 text-center">{error}</p>
               <div className="card-actions justify-center mt-2">
-                <button className="bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8] text-black px-4 py-2 w-full rounded-full font-semibold text-sm hover:opacity-90 transition" onClick={saveProfile}>
+                <button
+                  className="bg-gradient-to-r from-[#DFC9F5] to-[#B7FCD8] text-black px-4 py-2 w-full rounded-full font-semibold text-sm hover:opacity-90 transition"
+                  onClick={saveProfile}
+                >
                   Save Profile
                 </button>
               </div>
@@ -212,8 +206,21 @@ const EditProfile = ({ user }) => {
           </div>
         </div>
 
-        <UserCard
-          user={{ firstName, lastName, photoUrl, about, age, gender, skills }}
+        <ImageSwiper
+          cards={[
+            {
+              _id: "preview", 
+              firstName,
+              lastName,
+              photoUrl,
+              about,
+              age,
+              gender,
+              skills,
+            },
+          ]}
+          onAction={() => {}} // disable swipe API calls
+          className="pointer-events-none" // disable gestures
         />
       </div>
 

@@ -15,6 +15,7 @@ import About from "./components/About";
 import Home from "./components/Home";
 import SplashScreen from "./components/SplashScreen";
 import Contact from "./components/Contact";
+// import ImageSwiperPage, { ImageSwiper } from "./ui/ImageSwiperPage";
 
 function App() {
   const userData = useSelector((store) => store.user);
@@ -38,6 +39,9 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/connections" element={<Connections />} />
           <Route path="/requests" element={<Requests />} />
+          {/* <Route path="/request" element={<ImageSwiperPage />} /> */}
+
+          
 
           {/* Static Pages */}
           <Route path="/about" element={<About />} />

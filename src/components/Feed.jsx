@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed, removeFeed } from "../utils/feedSlice";
-import UserCard from "./Usercard";
+
 import { AnimatePresence } from "motion/react";
+import ImageSwiper from "../ui/ImageSwiperPage";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
@@ -30,12 +31,17 @@ const Feed = () => {
   const handleSendRequest = async (status, userId, direction) => {
     try {
       setAction({ userId, direction });
-      await new Promise((resolve) => setTimeout(resolve, 400)); // wait for animation
-      await axios.post(`${BASE_URL}/request/send/${status}/${userId}`, {}, { withCredentials: true });
+      await new Promise((resolve) => setTimeout(resolve, 400));
+      await axios.post(
+        `${BASE_URL}/request/send/${status}/${userId}`,
+        {},
+        { withCredentials: true }
+      );
       dispatch(removeFeed(userId));
       setAction(null);
     } catch (err) {
       console.log("Error:", err.message);
+      setAction(null);
     }
   };
 
@@ -45,16 +51,13 @@ const Feed = () => {
 
   return (
     <div className="flex justify-center my-10">
-      <AnimatePresence mode="wait">
-        {feed.length > 0 && (
-          <UserCard
-            key={feed[0]._id}
-            user={feed[0]}
-            onAction={handleSendRequest}
-            direction={action?.direction}
-          />
-        )}
-      </AnimatePresence>
+      {feed.length > 0 && (
+        <ImageSwiper
+          key={feed[0]._id}
+          cards={feed}
+          onAction={handleSendRequest}
+        />
+      )}
     </div>
   );
 };
